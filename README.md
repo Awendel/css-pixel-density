@@ -30,8 +30,8 @@ Moreover, the amount web users increases every year with largest growth coming f
 # Compatibility & Easy of Integration
 The proposed property would integrate very well with the following existing properties:
 
-transform, esp. scale
-will-change, especially when set to "transform". Will-change "locks" the internal resolution of a layer already, but it doesn't provide a way to lower it, especialling when "zooming" out. It is currently not enough to ensure every animation runs smooth. I will attach some test cases to prove this and show the only way to run it smooth would be to lower the resolution.
+- *transform*, esp. scale
+- *will-change*, especially when set to *"transform"*. Will-change "locks" the internal resolution of a layer already, but it doesn't provide a way to lower it, especialling when "zooming" out. It is currently not enough to ensure every animation runs smooth. I will attach some test cases to prove this and show the only way to run it smooth would be to lower the resolution.
 Moreover, it would be very simple to integrate into the existing render logic of browsers. Since there already is a mechanism to calculate the layer resolution (multiplying screen resolution by devicePixelRation and transform:scale), it would be just another multiplier in that computation.
 
 # Lack of alternatives
