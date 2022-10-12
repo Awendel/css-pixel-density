@@ -5,6 +5,7 @@ Link to CSS Drafts issue: https://github.com/w3c/csswg-drafts/issues/7848
 
 ## Abstract
 Offer a way for a given layer to adjust its internal resolution by a multiplying factor. The default should be "1" or "100%", which is the resolution that is currently chosen. 
+
 If I set the value to 0.5 or 50% it should half the internal resolution of the layer (and hence put less pressure on the rasterizer hardware and gpu memory etc).
 
 ```
