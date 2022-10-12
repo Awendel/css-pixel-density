@@ -56,9 +56,10 @@ Plain HTML is also by nature more accessible and eases the barrier to entry for 
 ## Examples
 
 
-### Increasing page load time
+### Decrease page load time
 ```
 const renderTarget = document.querySelector("#page")
+
 // substantially lower resolution to decrease GPU memory pressure and speed up shaders
 renderTarget.style.pixelDensity = '0.25'
 
@@ -69,6 +70,7 @@ window.addEventListener("load", function(ev){
   // reset resolution to native on of screen so content becomes sharp
   // this should be quite fast and not add much block to the UI thread
   // since layout calculations have already been performed and don't need to be redone
+  
   renderTarget.style.pixelDensity = '1'  
 
 })
