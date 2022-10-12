@@ -5,7 +5,7 @@ Link to CSS Drafts issue: https://github.com/w3c/csswg-drafts/issues/7848
 # Abstract
 Offer a way for a given layer to adjust its internal resolution by a multiplying factor. The default of course should be "1" or "100%" which is the resolution that is currently chosen. If I set the value to 0.5 or 50% it should half the internal resolution of the layer (and hence put less pressure on the rasterizer hardware and gpu memory etc).
 
-`
+```
 .layer{
   pixel-density : 0.5; /* halfs the resolution */
 }
@@ -14,7 +14,7 @@ Offer a way for a given layer to adjust its internal resolution by a multiplying
   pixel-density : 200%; /* doubles the resolution in preparation for zoom in */
   will-change : transform;
 }
-`
+```
 
 # Background
 Every year devices become higher and higher resolution (especially smartphones, most have very high dpi displays).
