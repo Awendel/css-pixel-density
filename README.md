@@ -54,4 +54,24 @@ Plain HTML is also by nature more accessible and eases the barrier to entry for 
 - has potential to reduce loading time of HTML pages when a lot of content is rendered, by lowering the resolution before content is rendered, hence taking pressure of UI thread, it will appear faster on the screen, then one could increase resolution async in order to sharpen it again but not blocking anything
 
 ## Examples
-to be added
+
+
+### Increasing page load time
+```
+const renderTarget = document.querySelector("#page")
+// substantially lower resolution to decrease GPU memory pressure and speed up shaders
+renderTarget.style.pixelDensity = '0.25'
+
+// perform expensive initial rendering, especially in a SPA
+
+window.addEventListener("load", function(ev){
+
+  // reset resolution to native on of screen so content becomes sharp
+  // this should be quite fast and not add much block to the UI thread
+  // since layout calculations have already been performed and don't need to be redone
+  renderTarget.style.pixelDensity = '1'  
+
+})
+
+
+```
