@@ -1,5 +1,6 @@
 # css-pixel-density
-Proposal for a new CSS property "pixel-density"
+Proposal for a new CSS property "pixel-density".
+
 Link to CSS Drafts issue: https://github.com/w3c/csswg-drafts/issues/7848
 
 # Abstract
