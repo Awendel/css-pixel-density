@@ -53,6 +53,24 @@ Plain HTML is also by nature more accessible and eases the barrier to entry for 
 - making web more accessible because now plain HTML can be used without having to implement this in custom WebGL / Canvas rendering stack
 - has potential to reduce loading time of HTML pages when a lot of content is rendered, by lowering the resolution before content is rendered, hence taking pressure of UI thread, it will appear faster on the screen, then one could increase resolution async in order to sharpen it again but not blocking anything
 
+## Edge Cases
+
+### Combination with transform : scale
+**pixel-density** is not an absolute property. Instead it scales relative to what the browser determines to be the correct rasterisation scale for a given layer.
+Hence values won't have to be manually calculated when using transform:scale (e.g. multiplying), but instead can still be used relatively
+
+## Combination with will-change: transform
+will-change transform is meant to "lock in" a given rasterisation scale based on when the property was set.
+
+This is currently not respected by all browsers. Only Chrome does so reliably. Ideally we'd get all browser vendors to treat will-change: transform as a "rasterization-lock". Whenn adding **pixel-density** we're able to modify that behaviour in 2 different ways:
+- scale the raster resolution when setting will-change:transform, either increasing it (e..g zoom in expected) or decreasing it (zoom out expected)
+- change the rasterization scale during an ongoing will-change transform animation. By changing **pixel-density** we force a recalculation of the raster resolution, even if it has been previously "locked in" via will-change transform. This might be neccessary, when zooming out by a lot, which could lead to gpu memory overflow, if the resolution is not adjusted in time
+
+## Nested pixel-density
+There is 2 possible approaches to this:
+- multiply nested values, similar how it's done with transform:scale
+- treat each value as independent of its possible parent values. This is the preferrable approach, since it leads to less ambiguity and fewer calculations. It is rare that a nested value would be neccessary, but they should be treated relatively to what the browser would have painted them, regardless of if a parent has a different value applied to it.
+
 ## Examples
 
 
