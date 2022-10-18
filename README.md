@@ -28,6 +28,18 @@ Moreover, the amount web users increases every year with largest growth coming f
 - make graphics intensive animation run smooth (60fps) even on low end devices, by temporarily lowering the resolution for the duration of the animation
 - offer way for low end devices to use graphics intensive application with useable framerates
 ( similar to how common it is to lower the resolution in gaming, especially on 4K displays etc)
+- [Problematic File](problematic-file.html) - this file is a great example of where the property could be applied to improve user and developer experience. 
+This renders some procedural graphics intensive content and starts a "zooming out" animation.
+It uses transform scale and will-change:transform in order to rasterise the content and "make it smooth"
+
+Chrome and Firefox both handle it in slightly different, but both insufficient ways:
+
+Chrome respects the will-change:transform property which leads to the animation running smooth.
+Yet, it locks the resolution at the start resolution which leads to a GPU memory explosion and henceforth it creates visual artifacts and doesn't render a lot of the content when zoomed out (since it runs out of GPU memory very quick).
+
+Firefox seems to ignore the will-change:transform property. This leads to it not having a GPU overflow, it shows all content but because it re-rasterises on every frame, it has a very low framerate (15fps or worse).
+
+This "zooming" out effect would be a very common scenario in something like Figma / Design tool, Maps or Whiteboarding tool. The only way to achieve running this smooth in a 4k display, would be to lower the resolution during the "zooming" out. Ideally also in conjunction with locking the raster resolution (using will-change: transform)
 
 ## Compatibility & Easy of Integration
 The proposed property would integrate very well with the following existing properties:
