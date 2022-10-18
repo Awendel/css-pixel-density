@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+	<div id="app">
+
+		<div id="inner"></div>
+
+	</div>
+	<div id="superimposed">
+
+		<div>
+			Open Developer Tools >> Rendering >> click "Frame Rendering Stats"<br>
+			Click <button>Start</button> to launch animation (watch GPU memory)
+		</div>
+
+	</div>
+
+	<style>
+		body{
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		#app{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: #adf;
+		}
+		.rect{
+			position: absolute;
+			padding: 20px 60px;
+			border-radius: 12px;
+			color: #fffd;
+			width: 250px;
+		}
+
+		#superimposed{
+			position: absolute;
+			top: 10px;
+			left: 300px;
+			z-index: 10;
+			padding: 5px;
+			background-color: #123c;
+			color: white;
+			
+		}
+	</style>
+
+	<script>
+
+const app = document.getElementById("app")
+
+const inner = document.getElementById("inner")
+
+const amount = 200
+
+const minX = -2000
+const rangeX = 5000
+const minY = -1000
+const rangeY = 3000
+
+for(let i = 0; i < amount; i++){
+
+	const node = document.createElement("div")
+	node.classList.add("rect")
+	node.innerText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
+
+	node.style.left = `${Math.random()*rangeX+minX}px`
+	node.style.top = `${Math.random()*rangeY+minY}px`
+
+	const hue = Math.random()*360
+
+	node.style.background = `radial-gradient(hsl(${hue}, 60%, 60%), hsl(${hue}, 60%, 30%))`
+
+	inner.appendChild(node)
+
+}
+
+
+const pos1 = {
+	scale:30,
+	x:0,
+	y:0
+}
+
+const pos2 = {
+	scale:0.1,
+	x:0,
+	y:0
+}
+
+function interpolateUI(durationSeconds, callback, onFinish) {
+    const now = performance.now();
+    const durationMS = durationSeconds * 1000;
+    let t = 0.0;
+    function draw() {
+        const frame = performance.now();
+        const diff = frame - now;
+        if (diff > durationMS) {
+            onFinish();
+        }
+        else {
+            callback(diff / durationMS);
+            requestAnimationFrame(draw);
+        }
+    }
+    draw();
+}
+
+const time = 7.0
+const frames = time * 60
+
+const ratio_scale = pos1.scale / pos2.scale
+const adjust = Math.pow(ratio_scale, 1/frames)
+
+let scale = pos1.scale
+let ratio = 1.0
+
+inner.style.transform = `scale(${scale})`
+
+function animate(){
+
+	inner.style.willChange = "transform"
+
+	interpolateUI(time, function(t){
+
+
+	scale = scale / adjust
+	inner.style.transform = `scale(${scale})`
+
+	}, function(){
+
+	})
+}
+
+const button = document.querySelector("button")
+
+button.onclick = function(){
+	animate()
+}
+
+
+
+
+	</script>
+	
+</body>
+</html>
