@@ -28,7 +28,10 @@ Moreover, the amount web users increases every year with largest growth coming f
 - make graphics intensive animation run smooth (60fps) even on low end devices, by temporarily lowering the resolution for the duration of the animation
 - offer way for low end devices to use graphics intensive application with useable framerates
 ( similar to how common it is to lower the resolution in gaming, especially on 4K displays etc)
-- [Problematic File](problematic-file.html) - this file is a great example of where the property could be applied to improve user and developer experience. 
+### Example File
+[Live Demo](https://jsfiddle.net/9wsry1g0/)
+
+[Problematic File](problematic-file.html) - this file is a great example of where the property could be applied to improve user and developer experience. 
 This renders some procedural graphics intensive content and starts a "zooming out" animation.
 It uses transform scale and will-change:transform in order to rasterise the content and "make it smooth"
 
