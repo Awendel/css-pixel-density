@@ -29,7 +29,7 @@ Moreover, the amount web users increases every year with largest growth coming f
 - offer way for low end devices to use graphics intensive application with useable framerates
 ( similar to how common it is to lower the resolution in gaming, especially on 4K displays etc)
 ### Example File
-( see [Live Demo](https://jsfiddle.net/9wsry1g0/))
+( see [Live Demo](https://jsfiddle.net/9wsry1g0/) )
 
 [Problematic File](problematic-file.html) - this file is a great example of where the property could be applied to improve user and developer experience. 
 This renders some procedural graphics intensive content and starts a "zooming out" animation.
