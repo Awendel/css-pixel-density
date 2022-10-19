@@ -50,6 +50,7 @@ The proposed property would integrate very well with the following existing prop
 - **transform**, esp. scale
 - **will-change**, especially when set to **"transform"**. Will-change "locks" the internal resolution of a layer already, but it doesn't provide a way to lower it, especialling when "zooming" out. It is currently not enough to ensure every animation runs smooth. I will attach some test cases to prove this and show the only way to run it smooth would be to lower the resolution.
 Moreover, it would be very simple to integrate into the existing render logic of browsers. Since there already is a mechanism to calculate the layer resolution (multiplying screen resolution by devicePixelRation and transform:scale), it would be just another multiplier in that computation.
+- new Houdini **Painting API**. This API allows developers to define custom "fills" of surfaces, to emulate something like a shader. The API is very similar to the Canvas2d API. But unfortunately, in contrast to the actual canvas API one is not able to set the internal resolution of the "canvas" to something other than the devicePixelRation. "pixel-density" henceforth would be great way to offer that ability to control the resolution.
 
 ## Lack of alternatives
 The only way to achieve this currently is by pushing all render logic to canvas, where one can control the resolution.
